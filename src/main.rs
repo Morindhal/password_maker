@@ -10,7 +10,7 @@ use rand::{thread_rng,Rng};
 fn main()
 {
     let matches = App::new("password_maker")
-        .version("0.1.0")
+        .version("1.0.0")
         .author("Bergman. <Morindhal@gmail.com>")
         .about("Generates and prints passwords.")
             .arg(Arg::with_name("Length")

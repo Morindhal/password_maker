@@ -1,8 +1,8 @@
 [package]
 name = "password_maker"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["bergman <morindhal@gmail.com>"]
 
 [dependencies]
-clap = "*"
-rand = "*"
+clap = "2.20.3"
+rand = "0.3.15"
