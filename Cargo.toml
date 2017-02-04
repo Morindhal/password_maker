@@ -1,0 +1,6 @@
+[package]
+name = "password_maker"
+version = "0.1.0"
+authors = ["bergman <morindhal@gmail.com>"]
+
+[dependencies]
