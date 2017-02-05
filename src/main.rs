@@ -1,16 +1,13 @@
-#![feature(test)]
-
 extern crate clap;
-extern crate rand;
-extern crate test;
+extern crate password_maker_lib;
 
 use clap::{Arg, App};
-use rand::{thread_rng,Rng};
+use password_maker_lib::package;
 
 fn main()
 {
     let matches = App::new("password_maker")
-        .version("1.0.0")
+        .version("1.0.1")
         .author("Bergman. <Morindhal@gmail.com>")
         .about("Generates and prints passwords.")
             .arg(Arg::with_name("Length")
@@ -32,42 +29,4 @@ fn main()
     {
         println!("{}", password);
     }
-}
-
-fn package(passwords: &mut Vec<String>, length: &usize, amount: &usize)
-{
-    let mut rng = thread_rng();
-    let mut randomized = String::new();
-    
-    let allowed = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890+-!?=.,;:'*^";
-    'ultra: loop
-    {
-        'outer: loop
-        {
-            randomized.push(allowed.chars().nth(rng.gen_range(0usize, allowed.len())).unwrap() );
-            if randomized.len() >= *length
-            {break 'outer;}
-        }
-        passwords.push(randomized.clone());
-        randomized.clear();
-        if passwords.len() >= *amount
-        {break 'ultra;}
-    }
-}
-
-
-#[bench]
-fn randomization_bench(b: &mut Bencher)
-    -> ()
-{
-    let mut passwords:Vec<String> = Vec::new(); passwords.clear();
-    let length = 10000;
-    let amount = 75000;
-    b.iter(||
-        {
-            package(&mut passwords, &length, &amount);
-            //tests are bugged atm, .len() does not return the correct value
-            //assert_eq!(passwords.len(),amount);
-            //assert_eq!(passwords.last().unwrap().len(), length);
-        });
 }
