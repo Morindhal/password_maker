@@ -1,6 +1,6 @@
 [root]
 name = "password_maker"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "clap 2.20.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "password_maker_lib 0.1.0",

@@ -2,7 +2,7 @@ extern crate clap;
 extern crate password_maker_lib;
 
 use clap::{Arg, App};
-use password_maker_lib::package;
+use password_maker_lib::*;
 
 fn main()
 {
@@ -22,11 +22,14 @@ fn main()
     let length = match matches.value_of("Length").unwrap_or("13").parse::<usize>() {Ok(x) => x, Err(_) => {13}};
     let amount = match matches.value_of("Amount").unwrap_or("1").parse::<usize>() {Ok(x) => x, Err(_) => {1}};
     
-    let mut passwords:Vec<String> = Vec::new();
-    
-    package(&mut passwords, &length, &amount);
-    for password in &passwords
+    if length <= 100 && amount <= 20
+    {printout_password(&length, &amount);}
+    else
     {
-        println!("{}", password);
+        let passwords:Vec<String> = create_package(&length, &amount);
+        for password in &passwords
+        {
+            println!("{}", password);
+        }
     }
 }
